@@ -10,7 +10,7 @@ CREATE TABLE netflix
     director VARCHAR(210),
     casts VARCHAR(1000),
     country VARCHAR(150),
-    date_added DATE,
+    date_added VARCHAR(55),
     release_year INT,
     rating VARCHAR(10),
     duration VARCHAR(15),
@@ -59,7 +59,7 @@ SELECT
 FROM netflix
 GROUP BY 1
 ORDER BY 2 DESC
-LIMIT 5
+LIMIT 5;
 
 -- 5. Identify the longest movie
 
@@ -72,4 +72,8 @@ WHERE type = 'Movie'
       FROM netflix
       WHERE type = 'Movie'
   );
+  
+ -- 6. Find content added in the last 5 years
 
+SELECT *  FROM netflix
+WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
