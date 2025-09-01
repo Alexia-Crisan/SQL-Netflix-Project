@@ -60,3 +60,16 @@ FROM netflix
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5
+
+-- 5. Identify the longest movie
+
+SELECT *
+FROM netflix
+WHERE type = 'Movie'
+  AND SPLIT_PART(duration, ' ', 1)::INT = 
+  (
+      SELECT MAX(SPLIT_PART(duration, ' ', 1)::INT)
+      FROM netflix
+      WHERE type = 'Movie'
+  );
+
