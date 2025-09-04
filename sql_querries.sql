@@ -77,3 +77,33 @@ WHERE type = 'Movie'
 
 SELECT *  FROM netflix
 WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
+
+-- 7. Find all the movies/TV shows by director 'Rajiv Chilaka'
+
+SELECT * FROM netflix
+WHERE director ILIKE '%Rajiv Chilaka%'
+
+-- 8. List all TV shows with more than 5 seasons
+
+SELECT * FROM netflix
+WHERE type = 'TV Show' AND SPLIT_PART(duration, ' ', 1)::INT > 5
+
+-- 9. Count the number of content items in each genre
+
+SELECT
+	UNNEST(STRING_TO_ARRAY(listed_in, ', ')) as category, 
+    COUNT(show_id) as total_content
+FROM netflix
+GROUP BY 1
+ORDER BY 1
+
+-- 10.Find each year and the average numbers of content release in India on netflix.
+
+SELECT 
+	EXTRACT(YEAR FROM TO_DATE(date_added, 'Month DD, YYYY')) as year,
+	COUNT(*) as yearly_content,
+	round(COUNT(*)::numeric / (SELECT COUNT(*) FROM netflix WHERE country = 'India')::numeric * 100, 2) as avg_content
+FROM netflix
+WHERE country = 'India'
+GROUP BY 1
+ORDER BY 2 DESC
