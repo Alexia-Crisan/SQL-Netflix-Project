@@ -107,3 +107,18 @@ FROM netflix
 WHERE country = 'India'
 GROUP BY 1
 ORDER BY 2 DESC
+
+-- 11. List all movies that are documentaries
+
+SELECT * FROM netflix
+WHERE listed_in ILIKE '%Documentaries%'
+
+-- 12. Find all content without a director
+
+SELECT * FROM netflix
+WHERE director is NULL
+
+-- 13. Find how many movies actor 'Salman Khan' appeared in last 10 years
+
+SELECT * FROM netflix
+WHERE casts ILIKE '%Salman Khan%' AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10
