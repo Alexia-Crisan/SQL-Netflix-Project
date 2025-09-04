@@ -21,7 +21,7 @@ The data is sourced from Kaggle:
 
 ## Schema
 
-````sql
+```sql
 DROP TABLE IF EXISTS netflix;
 
 CREATE TABLE netflix
@@ -39,6 +39,7 @@ CREATE TABLE netflix
     listed_in VARCHAR(100),
     description VARCHAR(500)
 );
+```
 
 ## Business Problems and Solutions
 
@@ -229,4 +230,3 @@ GROUP BY 1
 ## Conclusion
 
 This analysis provides a comprehensive view of Netflix's content and can help inform content strategy and decision-making.
-````
